@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "run-s openapi:generate prettier:format:lib && run-p babel:build:* tsc:build:types && yarn prettier:format:dist",
+    "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir types",
+    "prettier:test": "prettier --check './src/api.yml'",
+    "prettier:format:src": "prettier --write ./src",
+    "prettier:format:lib": "prettier --write ./lib",
+    "prettier:format:dist": "prettier --write ./dist",
+    "babel:build:cjs": "babel ./lib -x .ts --out-dir ./dist/cjs --env-name cjs",
+    "babel:build:esm": "babel ./lib -x .ts --out-dir ./dist/esm --env-name esm",
+    "openapi:set-version": "openapi-generator-cli version-manager set 4.3.1",
+    "openapi:validate": "openapi-generator-cli validate -i ./src/api.yml",
+    "openapi:generate": "openapi-generator-cli generate -g typescript-fetch -i ./src/api.yml -o ./lib/ --additional-properties=typescriptThreePlus=true"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.12.1",
+    "@babel/core": "7.12.3",
+    "@babel/plugin-proposal-export-default-from": "7.12.1",
+    "@babel/plugin-transform-runtime": "7.12.1",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-typescript": "7.12.1",
+    "@babel/runtime": "7.12.1",
+    "@openapi-generator-plus/typescript-fetch-client-generator": "0.5.3",
+    "@openapitools/openapi-generator-cli": "2.0.3",
+    "@types/node-fetch": "2.5.7",
+    "babel-plugin-add-module-exports": "1.0.4",
+    "babel-plugin-dev-expression": "0.2.2",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.1.2",
+    "rimraf": "3.0.2",
+    "typescript": "4.0.3"
+  }
+}
