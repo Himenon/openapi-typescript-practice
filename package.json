@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf lib dist build docs types yarn-error.log",
-    "build": "run-s openapi:generate prettier:format:lib && run-p babel:build:* tsc:build:types && yarn prettier:format:dist",
+    "build": "run-s openapi:generate prettier:format:lib redoc:gen:html && run-p babel:build:* tsc:build:types && yarn prettier:format:dist",
     "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir types",
     "prettier:test": "prettier --check './src/api.yml'",
     "prettier:format:src": "prettier --write ./src",
