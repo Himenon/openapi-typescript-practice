@@ -24,6 +24,8 @@ const generateCode = (filename) => {
     `--enable-post-process-file`,
     // `--model-name-suffix hoge`,
     `--additional-properties=typescriptThreePlus=true`,
+    // https://github.com/OpenAPITools/openapi-generator/issues/2384
+    // `--additional-properties supportsES6=true`,
     // `--verbose`,
   ];
   sh(`yarn openapi-generator-cli generate` + " " + options.join(" "));
