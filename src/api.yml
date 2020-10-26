@@ -9,4 +9,4 @@ paths:
       description: Returns a list of stuff
       responses:
         "200":
-          description: ひゃっはー！！！！
+          description: ひゃっaaasはー！！！！

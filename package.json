@@ -1,7 +1,8 @@
 {
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist build docs types yarn-error.log",
     "build": "run-s openapi:generate prettier:format:lib && run-p babel:build:* tsc:build:types && yarn prettier:format:dist",
     "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir types",
     "prettier:test": "prettier --check './src/api.yml'",
@@ -12,9 +13,16 @@
     "babel:build:esm": "babel ./lib -x .ts --out-dir ./dist/esm --env-name esm",
     "openapi:set-version": "openapi-generator-cli version-manager set 4.3.1",
     "openapi:validate": "openapi-generator-cli validate -i ./src/api.yml",
-    "openapi:generate": "openapi-generator-cli generate -g typescript-fetch -i ./src/api.yml -o ./lib/ --additional-properties=typescriptThreePlus=true"
+    "openapi:generate": "openapi-generator-cli generate -g typescript-fetch -i ./src/api.yml -o ./lib/ --additional-properties=typescriptThreePlus=true",
+    "swagger:preview": "run-p swagger:server swagger:open",
+    "swagger:server": "docker run --rm -p 8080:8080 -e SWAGGER_JSON=/local/src/api.yml -v ${PWD}:/local swaggerapi/swagger-ui:v3.20.1",
+    "swagger:open": "open http://localhost:8080",
+    "swagger:build": "swagger-cli bundle -r src/api.yml -o build/api.json",
+    "redoc:gen:html": "redoc-cli bundle src/api.yml -o docs/index.html --options.menuToggle --options.pathInMiddlePane",
+    "prism:server": "prism mock src/api.yml -p 4000"
   },
   "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
     "@babel/cli": "7.12.1",
     "@babel/core": "7.12.3",
     "@babel/plugin-proposal-export-default-from": "7.12.1",
@@ -24,11 +32,15 @@
     "@babel/runtime": "7.12.1",
     "@openapi-generator-plus/typescript-fetch-client-generator": "0.5.3",
     "@openapitools/openapi-generator-cli": "2.0.3",
+    "@stoplight/prism-cli": "^4.1.0",
     "@types/node-fetch": "2.5.7",
     "babel-plugin-add-module-exports": "1.0.4",
     "babel-plugin-dev-expression": "0.2.2",
+    "cherry-pick": "^0.5.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
+    "redoc": "^2.0.0-rc.40",
+    "redoc-cli": "^0.9.12",
     "rimraf": "3.0.2",
     "typescript": "4.0.3"
   }
