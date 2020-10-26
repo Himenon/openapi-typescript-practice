@@ -1,4 +1,6 @@
 const path = require("path");
+const fs = require("fs");
+const { EOL } = require("os");
 const { execSync } = require("child_process");
 
 const OUTPUT_DIR = "src";
@@ -13,14 +15,21 @@ const sh = (command) => {
   console.log(log);
 };
 
+const generateAliasTsFile = (name) => {
+  const codes = [
+    `export * from "./endpoints/${name}";`,
+  ];
+  fs.writeFileSync(path.join(process.cwd(), OUTPUT_DIR, `${name}.ts`), codes.join(EOL), { encoding: "utf-8" });
+}
+
 const generateCode = (filename) => {
   const endpointName = path.dirname(filename).split("/").pop();
   const options = [
     `-i ${filename}`,
-    `-o ${path.join(OUTPUT_DIR, endpointName)}`,
+    `-o ${path.join(OUTPUT_DIR, "endpoints", endpointName)}`,
     `--generator-name typescript-fetch`,
     `--model-package PKG`,
-    `--model-name-prefix ${endpointName}`,
+    // `--model-name-prefix ${endpointName}`,
     `--enable-post-process-file`,
     // `--model-name-suffix hoge`,
     `--additional-properties=typescriptThreePlus=true`,
@@ -29,8 +38,12 @@ const generateCode = (filename) => {
     // `--verbose`,
   ];
   sh(`yarn openapi-generator-cli generate` + " " + options.join(" "));
+  generateAliasTsFile(endpointName);
 };
 
+/**
+ * redoc-cliでドキュメントを生成する
+ */
 const generateDoc = (filename) => {
   const outputFileName = path.dirname(filename).split("/").pop().toLowerCase();
   sh(
@@ -38,6 +51,9 @@ const generateDoc = (filename) => {
   );
 };
 
+/**
+ * swagger-cli で yamlをjson化する
+ */
 const convertYamlToJson = (filename) => {
   const outputFileName = path.dirname(filename).split("/").pop().toLowerCase();
   sh(`yarn swagger-cli bundle -r ${filename} -o build/${outputFileName}.json`);
@@ -55,8 +71,9 @@ const validate = (filename) => {
 
 sources.forEach((source) => {
   generateCode(source);
-  // generateDoc(source);
-  // convertYamlToJson(source);
+  // JSON化する
+  convertYamlToJson(source);
+  generateDoc(source);
 });
 
 format(OUTPUT_DIR);
