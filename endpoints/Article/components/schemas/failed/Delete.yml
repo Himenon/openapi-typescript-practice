@@ -1,0 +1,16 @@
+type: object
+description: 記事の削除に失敗
+properties:
+  status:
+    type: number
+    description: StatusCode
+  reason:
+    type: string
+    description: 失敗した理由
+  articleId:
+    type: number
+    description: 削除に失敗した記事のID
+example:
+    status: 400
+    reason: サーバー内エラー
+    articleId: 100

@@ -1,0 +1,16 @@
+type: object
+description: 記事の更新に失敗
+properties:
+  status:
+    type: number
+    description: StatusCode
+  reason:
+    type: string
+    description: 失敗した理由
+  articleId:
+    type: number
+    description: 更新に失敗した記事のID
+example:
+    status: 400
+    reason: 何らかの理由で更新に失敗しました
+    articleId: 100

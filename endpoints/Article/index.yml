@@ -1,0 +1,117 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: Article DomainのAPI
+  description: Article関連のAPI週
+  license:
+    name: MIT
+externalDocs:
+  url: "https://himenon.github.io/openapi-practice/article"
+  description: "自動生成ドキュメント"
+
+tags:
+- name: Article
+  description: "投稿記事の情報"
+
+components:
+  schemas:
+    Entity:
+      $ref: "./components/schemas/Entity.yml"
+    Created:
+      $ref: "./components/schemas/success/Created.yml"
+    Updated:
+      $ref: "./components/schemas/success/Updated.yml"
+    Deleted:
+      $ref: "./components/schemas/success/Deleted.yml"
+    FailedCreate:
+      $ref: "./components/schemas/failed/Create.yml"
+    FailedUpdate:
+      $ref: "./components/schemas/failed/Update.yml"
+    FailedDelete:
+      $ref: "./components/schemas/failed/Delete.yml"
+  parameters:
+    ArticleId:
+      $ref: ./components/parameters/ArticleId.yml
+
+paths:
+  /article/:
+    post:
+      description: 記事を作成する
+      tags:
+        - Article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entity"
+      responses:
+        200:
+          description: 正常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Created"
+
+  /article/{articleId}:
+    get:
+      description: 記事を取得する
+      tags:
+        - Article
+      parameters:
+        - $ref: "#/components/parameters/ArticleId"
+      responses:
+        200:
+          description: 正常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Entity"
+        400:
+          description: 異常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FailedCreate"
+
+    put:
+      description: 記事を更新する
+      tags:
+        - Article
+      parameters:
+        - $ref: "#/components/parameters/ArticleId"
+      responses:
+        200:
+          description: 正常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Updated"
+        400:
+          description: 異常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FailedUpdate"
+
+    delete:
+      description: 記事を削除する
+      tags:
+        - Article
+      parameters:
+        - $ref: "#/components/parameters/ArticleId"
+      responses:
+        200:
+          description: 正常系
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deleted"
+              example:
+                articleId: 100
+        400:
+          description: 異常系
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/FailedDelete"

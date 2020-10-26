@@ -1,0 +1,20 @@
+type: object
+description: 記事の作成に成功
+properties:
+  status:
+    type: number
+    description: StatusCode
+  data:
+    type: object
+    properties:
+      title:
+        type: string
+        description: 記事タイトル
+      body:
+        type: string
+        description: 記事本文
+example:
+  status: 200
+  data:
+    title: タイトル
+    body: 本文

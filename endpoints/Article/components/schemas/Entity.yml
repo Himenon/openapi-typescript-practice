@@ -1,0 +1,13 @@
+type: object
+description: 記事の情報
+required: [title, body]
+properties:
+  title:
+    type: string
+    description: 記事のタイトル
+  body:
+    type: string
+    description: 本文
+example:
+  title: Hello World
+  body: hey!

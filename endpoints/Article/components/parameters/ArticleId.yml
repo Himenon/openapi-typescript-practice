@@ -1,0 +1,6 @@
+in: path
+name: articleId
+description: 記事のID
+required: true
+schema:
+  type: integer

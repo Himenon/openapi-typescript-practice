@@ -1,0 +1,10 @@
+type: object
+description: ユーザー情報
+required: [name, birthday]
+properties:
+  name:
+    type: string
+    description: ユーザー名
+  birthday:
+    type: string
+    description: 誕生日

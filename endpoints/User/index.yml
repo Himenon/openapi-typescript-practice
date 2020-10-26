@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: User DomainのAPI
+  description: User関連のAPI週
+  license:
+    name: MIT
+externalDocs:
+  url: "https://himenon.github.io/openapi-practice/user"
+  description: "自動生成ドキュメント"
+
+tags:
+- name: User
+  description: "投稿記事の情報"
+
+components:
+  schemas:
+    Entity:
+      $ref: "./components/schemas/Entity.yml"
+  parameters:
+    UserId:
+      $ref: ./components/parameters/UserId.yml
+
+paths:
+  /user/{userId}:
+    post:
+      description: 記事を作成する
+      tags:
+        - User
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        200:
+          description: "ユーザー情報を取得した"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Entity"
