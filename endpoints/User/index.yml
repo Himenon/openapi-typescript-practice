@@ -9,22 +9,29 @@ externalDocs:
   url: "https://himenon.github.io/openapi-practice/user"
   description: "自動生成ドキュメント"
 
+servers:
+  - url: http://localhost:4000
+    description: ローカル開発環境
+  - url: http://localhost:5000
+    description: 本番環境
+
 tags:
 - name: User
   description: "投稿記事の情報"
 
 components:
   schemas:
-    Entity:
-      $ref: "./components/schemas/Entity.yml"
+    Model:
+      $ref: "./components/schemas/_Model.yml"
   parameters:
     UserId:
       $ref: ./components/parameters/UserId.yml
 
 paths:
   /user/{userId}:
-    post:
-      description: 記事を作成する
+    get:
+      operationId: get
+      description: ユーザー情報を取得する
       tags:
         - User
       parameters:
@@ -35,4 +42,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Entity"
+                $ref: "#/components/schemas/Model"

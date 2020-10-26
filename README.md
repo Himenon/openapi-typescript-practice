@@ -66,6 +66,20 @@ yarn run redoc:gen:html
 ## Reference
 
 * [VSCodeでリファクタリング・保守するOpenAPI - Qiita](https://qiita.com/tMinami/items/5b1a921e82b4c7979cd1)
+* [俺的【OAS】との向き合い方 (爆速でOpenAPIと友達になろう)](https://tech-blog.optim.co.jp/entry/2020/04/13/100000)
+
+#### `WARN  i.s.v.p.p.ExternalRefProcessor - A model for class Schema`
+
+* ディレクトリ名に予約語を利用している場合に発生する
+  - created
+  - updated
+  - deleted
+  - entity
+  - model
+
+#### `[main] WARN  o.o.c.ignore.CodegenIgnoreProcessor - Output directory does not exist, or is inaccessible. No file (.openapi-generator-ignore) will be evaluated.`
+
+対応中
 
 ## LICENSE
 

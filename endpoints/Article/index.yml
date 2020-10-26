@@ -9,26 +9,32 @@ externalDocs:
   url: "https://himenon.github.io/openapi-practice/article"
   description: "自動生成ドキュメント"
 
+servers:
+  - url: http://localhost:4000
+    description: ローカル開発環境
+  - url: http://localhost:5000
+    description: 本番環境
+
 tags:
 - name: Article
   description: "投稿記事の情報"
 
 components:
   schemas:
-    Entity:
-      $ref: "./components/schemas/Entity.yml"
+    Model:
+      $ref: "./components/schemas/_Model.yml"
     Created:
-      $ref: "./components/schemas/success/Created.yml"
+      $ref: "./components/schemas/success/CreatedResponse.yml"
     Updated:
-      $ref: "./components/schemas/success/Updated.yml"
+      $ref: "./components/schemas/success/UpdatedResponse.yml"
     Deleted:
-      $ref: "./components/schemas/success/Deleted.yml"
+      $ref: "./components/schemas/success/DeletedResponse.yml"
     FailedCreate:
-      $ref: "./components/schemas/failed/Create.yml"
+      $ref: "./components/schemas/failed/CreateResponse.yml"
     FailedUpdate:
-      $ref: "./components/schemas/failed/Update.yml"
+      $ref: "./components/schemas/failed/UpdateResponse.yml"
     FailedDelete:
-      $ref: "./components/schemas/failed/Delete.yml"
+      $ref: "./components/schemas/failed/DeleteResponse.yml"
   parameters:
     ArticleId:
       $ref: ./components/parameters/ArticleId.yml
@@ -36,6 +42,7 @@ components:
 paths:
   /article/:
     post:
+      operationId: create
       description: 記事を作成する
       tags:
         - Article
@@ -44,7 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Entity"
+              $ref: "#/components/schemas/Model"
       responses:
         200:
           description: 正常系
@@ -55,6 +62,7 @@ paths:
 
   /article/{articleId}:
     get:
+      operationId: get
       description: 記事を取得する
       tags:
         - Article
@@ -66,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Entity"
+                $ref: "#/components/schemas/Model"
         400:
           description: 異常系
           content:
@@ -75,6 +83,7 @@ paths:
                 $ref: "#/components/schemas/FailedCreate"
 
     put:
+      operationId: update
       description: 記事を更新する
       tags:
         - Article
@@ -95,6 +104,7 @@ paths:
                 $ref: "#/components/schemas/FailedUpdate"
 
     delete:
+      operationId: delete
       description: 記事を削除する
       tags:
         - Article

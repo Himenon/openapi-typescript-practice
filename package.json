@@ -19,7 +19,7 @@
     "swagger:open": "open http://localhost:8080",
     "swagger:build": "swagger-cli bundle -r src/api.yml -o build/api.json",
     "redoc:gen:html": "redoc-cli bundle src/api.yml -o docs/index.html --options.menuToggle --options.pathInMiddlePane",
-    "prism:server": "prism mock src/api.yml -p 4000"
+    "prism:server": "prism mock -p 4000"
   },
   "devDependencies": {
     "@apidevtools/swagger-cli": "4.0.4",
