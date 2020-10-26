@@ -16,7 +16,7 @@
   resolved "https://registry.yarnpkg.com/@apidevtools/openapi-schemas/-/openapi-schemas-2.0.4.tgz#bae1cef77ebb2b3705c7cc6911281da5153c1ab3"
   integrity sha512-ob5c4UiaMYkb24pNhvfSABShAwpREvUGCkqjiz/BX9gKZ32y/S22M+ALIHftTAuv9KsFVSpVdIDzi9ZzFh5TCA==
 
-"@apidevtools/swagger-cli@^4.0.4":
+"@apidevtools/swagger-cli@4.0.4":
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@apidevtools/swagger-cli/-/swagger-cli-4.0.4.tgz#c645c291f56e4add583111aca9edeee23d60fa10"
   integrity sha512-hdDT3B6GLVovCsRZYDi3+wMcB1HfetTU20l2DC8zD3iFRNMC6QNAZG5fo/6PYeHWBEv7ri4MvnlKodhNB0nt7g==
@@ -1115,7 +1115,7 @@
   resolved "https://registry.yarnpkg.com/@stoplight/ordered-object-literal/-/ordered-object-literal-1.0.1.tgz#01ece81ba5dda199ca3dc5ec7464691efa5d5b76"
   integrity sha512-kDcBIKwzAXZTkgzaiPXH2I0JXavBkOb3jFzYNFS5cBuvZS3s/K+knpk2wLVt0n8XrnRQsSffzN6XG9HqUhfq6Q==
 
-"@stoplight/prism-cli@^4.1.0":
+"@stoplight/prism-cli@4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@stoplight/prism-cli/-/prism-cli-4.1.0.tgz#03f58d7b1330b5987f00630bbda36817c8a7e752"
   integrity sha512-qDXpReNEotLFbRjuztIDWu6OTS/QHQQ53Bi3GeEx6O1QVNUqUgezwsk/7/FaPFkV5CWwbhQZOwD1wq1nhCMaYA==
@@ -1805,7 +1805,7 @@ charset@^1.0.0:
   resolved "https://registry.yarnpkg.com/charset/-/charset-1.0.1.tgz#8d59546c355be61049a8fa9164747793319852bd"
   integrity sha512-6dVyOOYjpfFcL1Y4qChrAoQLRHvj2ziyhcm0QJlhOcAhykL/k1kTUPbeo+87MNRTRdk2OIIsIXbuF3x2wi5EXg==
 
-cherry-pick@^0.5.0:
+cherry-pick@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cherry-pick/-/cherry-pick-0.5.0.tgz#c1d96e592a1a1aa3ac7103fcfdec254e57ae02db"
   integrity sha512-fdr+28SKHk1OI+6+pFOT1Qrw8tDpsyiUVgf08hQvVY/dqy7ztsy4lc7qtgFXViParwJ82ElnlVQ2/hgQjNYcww==
@@ -4696,7 +4696,7 @@ readdirp@~3.5.0:
   dependencies:
     picomatch "^2.2.1"
 
-redoc-cli@^0.9.12:
+redoc-cli@0.9.12:
   version "0.9.12"
   resolved "https://registry.yarnpkg.com/redoc-cli/-/redoc-cli-0.9.12.tgz#9a0f45311bb8cf06c90d63354565f3a12f9f8542"
   integrity sha512-9Ap7WfEsYtAoVZNyA8lryWAsU2Wq0lHXaNiFgdVZb4zltHNTYEqKmRi06WhileeuqVTNkd1CF2S5CCS5Xg9+aQ==
@@ -4714,7 +4714,7 @@ redoc-cli@^0.9.12:
     tslib "^2.0.0"
     yargs "^15.4.1"
 
-redoc@^2.0.0-rc.40:
+redoc@2.0.0-rc.40, redoc@^2.0.0-rc.40:
   version "2.0.0-rc.40"
   resolved "https://registry.yarnpkg.com/redoc/-/redoc-2.0.0-rc.40.tgz#4dd7d095265bd2af464069e684863a5b17f7a507"
   integrity sha512-f1na5vWCr37R5+G4xhbD1TjH6j6b/he8nEMGGJOwDcIMMcDK88S0YEWuhplhdVuZdc4c61CoxZqGXqcDRp5m0w==

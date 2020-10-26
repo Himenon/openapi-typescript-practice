@@ -22,7 +22,7 @@
     "prism:server": "prism mock src/api.yml -p 4000"
   },
   "devDependencies": {
-    "@apidevtools/swagger-cli": "^4.0.4",
+    "@apidevtools/swagger-cli": "4.0.4",
     "@babel/cli": "7.12.1",
     "@babel/core": "7.12.3",
     "@babel/plugin-proposal-export-default-from": "7.12.1",
@@ -32,15 +32,15 @@
     "@babel/runtime": "7.12.1",
     "@openapi-generator-plus/typescript-fetch-client-generator": "0.5.3",
     "@openapitools/openapi-generator-cli": "2.0.3",
-    "@stoplight/prism-cli": "^4.1.0",
+    "@stoplight/prism-cli": "4.1.0",
     "@types/node-fetch": "2.5.7",
     "babel-plugin-add-module-exports": "1.0.4",
     "babel-plugin-dev-expression": "0.2.2",
-    "cherry-pick": "^0.5.0",
+    "cherry-pick": "0.5.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
-    "redoc": "^2.0.0-rc.40",
-    "redoc-cli": "^0.9.12",
+    "redoc": "2.0.0-rc.40",
+    "redoc-cli": "0.9.12",
     "rimraf": "3.0.2",
     "typescript": "4.0.3"
   }
