@@ -16,8 +16,8 @@ servers:
     description: 本番環境
 
 tags:
-- name: Article
-  description: "投稿記事の情報"
+  - name: Article
+    description: "投稿記事の情報"
 
 components:
   schemas:
@@ -124,4 +124,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref:  "#/components/schemas/FailedDelete"
+                $ref: "#/components/schemas/FailedDelete"

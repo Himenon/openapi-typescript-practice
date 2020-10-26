@@ -16,8 +16,8 @@ servers:
     description: 本番環境
 
 tags:
-- name: User
-  description: "投稿記事の情報"
+  - name: User
+    description: "投稿記事の情報"
 
 components:
   schemas:

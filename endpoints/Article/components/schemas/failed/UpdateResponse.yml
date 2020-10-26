@@ -11,6 +11,6 @@ properties:
     type: number
     description: 更新に失敗した記事のID
 example:
-    status: 400
-    reason: 何らかの理由で更新に失敗しました
-    articleId: 100
+  status: 400
+  reason: 何らかの理由で更新に失敗しました
+  articleId: 100
