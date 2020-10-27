@@ -1,6 +1,6 @@
 {
   "name": "@himenon/openapi-typescript-practice",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "OpenAPIを利用したAPI作成と、開発、リリースフローまでの仕組みづくりの練習",
   "repository": {
     "type": "git",
