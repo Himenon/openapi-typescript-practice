@@ -3494,7 +3494,7 @@ content-type@^1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-conventional-changelog-angular-all@^1.7.0:
+conventional-changelog-angular-all@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/conventional-changelog-angular-all/-/conventional-changelog-angular-all-1.7.0.tgz#848997135556bae66d7545630b30ea35a738820a"
   integrity sha512-wIlKDqXXYvnUUhLt31vDTS6lUDSDs8GHkVaDqDDFFtaFUTVKbG6biG80JZYswqkQczkOPdQiFK8d8VxuU0zwcQ==
@@ -3664,7 +3664,7 @@ cp-file@^7.0.0:
     nested-error-stacks "^2.0.0"
     p-event "^4.1.0"
 
-cpy@^8.1.1:
+cpy@8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/cpy/-/cpy-8.1.1.tgz#066ed4c6eaeed9577df96dae4db9438c1a90df62"
   integrity sha512-vqHT+9o67sMwJ5hUd/BAOYeemkU+MuFRsK2c36Xc3eefQpAsp1kAsyDxEDcc5JS1+y9l/XHPrIsVTcyGGmkUUQ==
@@ -6107,7 +6107,7 @@ kind-of@^6.0.0, kind-of@^6.0.2, kind-of@^6.0.3:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-lerna@^3.22.1:
+lerna@3.22.1:
   version "3.22.1"
   resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.22.1.tgz#82027ac3da9c627fd8bf02ccfeff806a98e65b62"
   integrity sha512-vk1lfVRFm+UuEFA7wkLKeSF7Iz13W+N/vFd48aW2yuS7Kv0RbNm2/qcDPV863056LMfkRlsEe+QYOw3palj5Lg==
