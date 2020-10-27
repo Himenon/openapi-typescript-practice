@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 const pkg = require("../package.json");
+const cpy = require("cpy");
 
 const publishDir = path.resolve(__dirname, "../", pkg.publishConfig.directory);
 const publishPackageJson = path.join(publishDir, "package.json");
@@ -14,3 +15,8 @@ pkg.publishConfig.directory = undefined; // 不要な設定
 fs.writeFileSync(publishPackageJson, JSON.stringify(pkg, null, 2), {
   encoding: "utf-8",
 });
+
+(async () => {
+  await cpy(["README.md", "LICENSE", "CHANGELOG.md"], "lib");
+  console.log("Files copied!");
+})();

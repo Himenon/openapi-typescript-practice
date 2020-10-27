@@ -1,0 +1,17 @@
+{
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "changelogPreset": "angular-all",
+      "message": "chore(release): publish"
+    }
+  },
+  "publish": {
+    "access": "public",
+    "allowBranch": "master",
+    "ignoreChanges": ["CHANGELOG.md"]
+  },
+  "version": "independent",
+  "npmClient": "yarn",
+  "packages": ["."]
+}

@@ -6,7 +6,7 @@
     "ts": "ts-node -P tsconfig.json"
   },
   "dependencies": {
-    "@himenon/openapi-practice": "file:../lib/"
+    "@himenon/openapi-typescript-practice": "file:../lib/"
   },
   "devDependencies": {
     "@types/node": "14.14.5",
