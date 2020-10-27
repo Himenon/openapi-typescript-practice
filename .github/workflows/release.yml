@@ -22,6 +22,7 @@ jobs:
 
   release-github-registry:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
         with:
@@ -37,6 +38,7 @@ jobs:
 
   release-npm-registry:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
         with:
