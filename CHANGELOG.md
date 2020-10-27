@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.1"></a>
+
+## [0.1.1](https://github.com/Himenon/openapi-typescript-practice/compare/@himenon/openapi-typescript-practice@0.1.0...@himenon/openapi-typescript-practice@0.1.1) (2020-10-27)
+
+### Bug Fixes
+
+- release workflow ([92d3c26](https://github.com/Himenon/openapi-typescript-practice/commit/92d3c26))
+
 <a name="0.1.0"></a>
 
 # 0.1.0 (2020-10-27)
