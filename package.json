@@ -1,23 +1,19 @@
 {
-  "name": "@himenon/api",
-  "private": true,
+  "name": "@himenon/openapi-practice",
+  "version": "0.0.1",
   "license": "MIT",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
   "scripts": {
+    "build": "yarn clean && node ./tools/build.js && run-p tsc:build:* && run-s cherry-pick copy:pkgjson",
+    "cherry-pick": "cherry-pick --types-dir ./types --cjs-dir ./cjs --esm-dir ./esm --cwd ./lib --input-dir ../src",
     "clean": "rimraf lib dist build docs types yarn-error.log src",
-    "build": "yarn clean && node ./tools/build.js && run-p tsc:build:* && yarn cherry-pick",
-    "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir lib/types",
+    "copy:pkgjson": "node ./tools/copy-package-json.js",
+    "mock:server": "node ./tools/server.js",
     "tsc:build:cjs": "tsc -p tsconfig.cjs.json",
     "tsc:build:esm": "tsc -p tsconfig.esm.json",
-    "cherry-pick": "cherry-pick --types-dir ./types --cjs-dir ./cjs --esm-dir ./esm --cwd ./lib --input-dir ../src",
-    "eslint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
-    "prettier:format": "prettier --write 'endpoints/**/*.yml'",
-    "prettier:test": "prettier --check 'endpoints/**/*.yml'",
-    "openapi:set-version": "openapi-generator-cli version-manager set 4.3.1",
-    "_swagger:preview": "run-p swagger:server swagger:open",
-    "_swagger:server": "docker run --rm -p 8080:8080 -e SWAGGER_JSON=/local/src/api.yml -v ${PWD}:/local swaggerapi/swagger-ui:v3.20.1",
-    "_swagger:open": "open http://localhost:8080",
-    "_swagger:build": "swagger-cli bundle -r src/api.yml -o build/api.json",
-    "prism:server": "prism mock -p 4000 build/article.json"
+    "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir lib/types"
   },
   "devDependencies": {
     "@apidevtools/swagger-cli": "4.0.4",
@@ -36,16 +32,25 @@
     "@typescript-eslint/parser": "4.5.0",
     "babel-plugin-add-module-exports": "1.0.4",
     "babel-plugin-dev-expression": "0.2.2",
+    "chalk": "4.1.0",
     "cherry-pick": "0.5.0",
+    "chokidar": "3.4.3",
     "eslint": "7.12.0",
     "eslint-config-prettier": "6.14.0",
     "eslint-plugin-import": "2.22.1",
-    "node-fetch": "2.6.1",
+    "execa": "4.0.3",
+    "husky": "4.3.0",
+    "lint-staged": "10.5.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
     "redoc": "2.0.0-rc.40",
     "redoc-cli": "0.9.12",
     "rimraf": "3.0.2",
+    "sort-package-json": "1.46.1",
     "typescript": "4.0.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "lib"
   }
 }

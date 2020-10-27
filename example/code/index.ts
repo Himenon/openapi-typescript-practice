@@ -1,5 +1,4 @@
-const { ArticleApi, Configuration } = require("../lib/Article");
-// import { ArticleApi, Configuration } from "../lib/Article";
+import { ArticleApi, Configuration } from "@himenon/openapi-practice/Article";
 
 const main = async () => {
   const client = new ArticleApi(
@@ -12,7 +11,7 @@ const main = async () => {
     articleId: 123,
   });
 
-  console.log(result);
+  console.log({ result });
 };
 
 main().catch(console.error);
