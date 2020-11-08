@@ -1,44 +1,40 @@
 {
   "name": "@himenon/openapi-typescript-practice",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "OpenAPIを利用したAPI作成と、開発、リリースフローまでの仕組みづくりの練習",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Himenon/openapi-typescript-practice.git"
   },
   "license": "MIT",
+  "sideEffects": false,
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
   "scripts": {
-    "build": "yarn clean && node ./tools/build.js && run-p tsc:build:* && run-s cherry-pick copy:lib",
-    "cherry-pick": "cherry-pick --types-dir ./types --cjs-dir ./cjs --esm-dir ./esm --cwd ./lib --input-dir ../src",
-    "clean": "rimraf lib dist build docs types yarn-error.log src",
-    "copy:lib": "node ./tools/copy-lib.js",
-    "mock:server": "node ./tools/server.js",
+    "build": "run-s clean build:code build:docs",
+    "build:code": "yarn ts ./tools/buildCode.ts",
+    "build:docs": "yarn ts ./tools/buildDocs.ts",
+    "clean": "yarn ts ./tools/clean.ts",
+    "json2schema": "yarn ts ./tools/json2schema.ts",
+    "mock:server": "yarn ts ./tools/mockServer.ts",
+    "publish:ghpages": "gh-pages --dist ./docs -b gh-pages",
     "release:github:registry": "yarn publish --registry https://npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}",
     "release:npm:registry": "yarn publish",
-    "tsc:build:cjs": "tsc -p tsconfig.cjs.json",
-    "tsc:build:esm": "tsc -p tsconfig.esm.json",
-    "tsc:build:types": "yarn tsc -d --emitDeclarationOnly --outDir lib/types"
+    "ts": "ts-node -P tsconfig.build.json"
+  },
+  "dependencies": {
+    "@types/superagent": "4.1.10",
+    "superagent": "6.1.0"
   },
   "devDependencies": {
     "@apidevtools/swagger-cli": "4.0.4",
-    "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.3",
-    "@babel/plugin-proposal-export-default-from": "7.12.1",
-    "@babel/plugin-transform-runtime": "7.12.1",
-    "@babel/preset-env": "7.12.1",
-    "@babel/preset-typescript": "7.12.1",
-    "@babel/runtime": "7.12.1",
-    "@openapi-generator-plus/typescript-fetch-client-generator": "0.5.3",
-    "@openapitools/openapi-generator-cli": "2.0.3",
     "@stoplight/prism-cli": "4.1.0",
-    "@types/node-fetch": "2.5.7",
+    "@types/fs-extra": "9.0.3",
+    "@types/rimraf": "3.0.0",
     "@typescript-eslint/eslint-plugin": "4.5.0",
     "@typescript-eslint/parser": "4.5.0",
-    "babel-plugin-add-module-exports": "1.0.4",
-    "babel-plugin-dev-expression": "0.2.2",
+    "api-spec-converter": "2.11.2",
     "chalk": "4.1.0",
     "cherry-pick": "0.5.0",
     "chokidar": "3.4.3",
@@ -48,19 +44,21 @@
     "eslint-config-prettier": "6.14.0",
     "eslint-plugin-import": "2.22.1",
     "execa": "4.0.3",
+    "fs-extra": "9.0.1",
+    "gh-pages": "3.1.0",
     "husky": "4.3.0",
+    "json2yaml": "1.1.0",
     "lerna": "3.22.1",
     "lint-staged": "10.5.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
-    "redoc": "2.0.0-rc.40",
-    "redoc-cli": "0.9.12",
     "rimraf": "3.0.2",
     "sort-package-json": "1.46.1",
+    "swagger-typescript-codegen": "3.2.1",
+    "ts-node": "9.0.0",
     "typescript": "4.0.3"
   },
   "publishConfig": {
-    "access": "public",
-    "directory": "lib"
+    "access": "public"
   }
 }

@@ -1,0 +1,162 @@
+{{#imports}}
+/// <reference path="{{&.}}" />
+{{/imports}}
+
+import * as request from "superagent";
+import { SuperAgentStatic, SuperAgentRequest, Response } from "superagent";
+
+export type RequestHeaders = {
+    [header: string]: string;
+}
+export type RequestHeadersHandler = (headers: RequestHeaders) => RequestHeaders;
+
+export type ConfigureAgentHandler = (agent: SuperAgentStatic) => SuperAgentStatic;
+
+export type ConfigureRequestHandler = (agent: SuperAgentRequest) => SuperAgentRequest;
+
+export type CallbackHandler = (err: any, res?: request.Response) => void;
+
+{{#definitions}}
+export type {{&name}} = {{#tsType}}{{> type}}{{/tsType}};
+
+{{/definitions}}
+
+export type Logger = { log: (line: string) => any };
+
+export interface ResponseWithBody<S extends number, T> extends Response {
+    status: S;
+    body: T;
+}
+
+export type QueryParameters = { [param: string]: any };
+
+export interface CommonRequestOptions {
+  $queryParameters?: QueryParameters;
+  $domain?: string;
+  $path?: string | ((path: string) => string);
+  $retries?: number; // number of retries; see: https://github.com/visionmedia/superagent/blob/master/docs/index.md#retrying-requests
+  $timeout?: number; // request timeout in milliseconds; see: https://github.com/visionmedia/superagent/blob/master/docs/index.md#timeouts
+  $deadline?: number; // request deadline in milliseconds; see: https://github.com/visionmedia/superagent/blob/master/docs/index.md#timeouts
+}
+
+/**
+ * {{&description}}
+ * @class {{&className}}
+ * @param {(string)} [domainOrOptions] - The project domain.
+ */
+export class {{&className}} {
+
+    private domain: string = "{{&domain}}";
+    private errorHandlers: CallbackHandler[] = [];
+    private requestHeadersHandler?: RequestHeadersHandler;
+    private configureAgentHandler?: ConfigureAgentHandler;
+    private configureRequestHandler?: ConfigureRequestHandler;
+
+    constructor(domain?: string, private logger?: Logger) {
+        if(domain) {
+            this.domain = domain;
+        }
+    }
+
+    public getDomain(): string {
+        return this.domain;
+    }
+
+    public addErrorHandler(handler: CallbackHandler): void {
+        this.errorHandlers.push(handler);
+    }
+
+    public setRequestHeadersHandler(handler: RequestHeadersHandler): void {
+        this.requestHeadersHandler = handler;
+    }
+
+    public setConfigureAgentHandler(handler: ConfigureAgentHandler): void {
+        this.configureAgentHandler = handler;
+    }
+
+    public setConfigureRequestHandler(handler: ConfigureRequestHandler): void {
+        this.configureRequestHandler = handler;
+    }
+
+    private request(method: string, url: string, body: any, headers: RequestHeaders, queryParameters: QueryParameters, form: any, reject: CallbackHandler, resolve: CallbackHandler, opts: CommonRequestOptions): void {
+        if(this.logger) {
+          this.logger.log(`Call ${method} ${url}`);
+        }
+
+        const agent = this.configureAgentHandler
+            ? this.configureAgentHandler(request.default)
+            : request.default;
+
+        let req = agent(method, url);
+        if (this.configureRequestHandler) {
+            req = this.configureRequestHandler(req);
+        }
+     
+        req = req.query(queryParameters);
+
+        if (this.requestHeadersHandler) {
+            headers = this.requestHeadersHandler({...headers});
+        }
+
+        req.set(headers);
+
+        if(body) {
+            req.send(body);
+        
+            if(typeof(body) === 'object' && !(body.constructor.name === 'Buffer')) {
+                headers['content-type'] = 'application/json';
+            }
+        }
+
+        if(Object.keys(form).length > 0) {
+            req.type('form');
+            req.send(form);
+        }
+
+        if (opts.$retries && opts.$retries > 0) {
+            req.retry(opts.$retries);
+        }
+
+        if (opts.$timeout && opts.$timeout > 0 || opts.$deadline && opts.$deadline > 0) {
+            req.timeout({ deadline: opts.$deadline, response: opts.$timeout });
+        }
+
+        req.end((error, response) => {
+            // an error will also be emitted for a 4xx and 5xx status code
+            // the error object will then have error.status and error.response fields
+            // see superagent error handling: https://github.com/visionmedia/superagent/blob/master/docs/index.md#error-handling
+            if(error) {
+                reject(error);
+                this.errorHandlers.forEach(handler => handler(error));
+            } else {
+                resolve(response);
+            }
+        });
+    }
+
+    private convertParameterCollectionFormat < T > (param: T, collectionFormat: string | undefined): T | string {
+        if (Array.isArray(param) && param.length >= 2) {
+            switch (collectionFormat) {
+                case "csv":
+                    return param.join(",");
+                case "ssv":
+                    return param.join(" ");
+                case "tsv":
+                    return param.join("\t");
+                case "pipes":
+                    return param.join("|");
+                default:
+                    return param;
+            }
+        }
+
+        return param;
+    }
+
+{{#methods}}
+    {{> method}}
+
+{{/methods}}
+}
+
+export default {{&className}};
