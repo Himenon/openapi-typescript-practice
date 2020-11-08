@@ -21,8 +21,10 @@ tags:
 
 components:
   schemas:
-    Model:
-      $ref: "./components/schemas/_Model.yml"
+    Article:
+      $ref: "./components/schemas/Article.yml"
+    User:
+      $ref: "./components/schemas/User.yml"
     Created:
       $ref: "./components/schemas/success/CreatedResponse.yml"
     Updated:
@@ -36,13 +38,15 @@ components:
     FailedDelete:
       $ref: "./components/schemas/failed/DeleteResponse.yml"
   parameters:
+    UserId:
+      $ref: "./components/parameters/UserId.yml"
     ArticleId:
-      $ref: ./components/parameters/ArticleId.yml
+      $ref: "./components/parameters/ArticleId.yml"
 
 paths:
   /article/:
     post:
-      operationId: create
+      operationId: createArticle
       description: 記事を作成する
       tags:
         - Article
@@ -51,7 +55,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Model"
+              $ref: "#/components/schemas/Article"
       responses:
         200:
           description: 正常系
@@ -62,7 +66,7 @@ paths:
 
   /article/{articleId}:
     get:
-      operationId: get
+      operationId: getArticle
       description: 記事を取得する
       tags:
         - Article
@@ -74,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Model"
+                $ref: "#/components/schemas/Article"
         400:
           description: 異常系
           content:
@@ -83,7 +87,7 @@ paths:
                 $ref: "#/components/schemas/FailedCreate"
 
     put:
-      operationId: update
+      operationId: updateArticle
       description: 記事を更新する
       tags:
         - Article
@@ -104,7 +108,7 @@ paths:
                 $ref: "#/components/schemas/FailedUpdate"
 
     delete:
-      operationId: delete
+      operationId: deleteArticle
       description: 記事を削除する
       tags:
         - Article
@@ -125,3 +129,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FailedDelete"
+
+  /user/{userId}:
+    get:
+      operationId: getUser
+      description: ユーザー情報を取得する
+      tags:
+        - User
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        200:
+          description: "ユーザー情報を取得した"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
