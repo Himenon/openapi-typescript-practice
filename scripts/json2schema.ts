@@ -35,6 +35,7 @@ const getObjectProp = (properties: {}, nullable?: boolean) => {
     type: "object",
     nullable,
     properties,
+    additionalProperties: false,
   };
 };
 
