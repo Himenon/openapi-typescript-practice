@@ -1,0 +1,5 @@
+description: ブログ記事の検索結果を返します
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/BlogPost/SearchBlogPost.yml"

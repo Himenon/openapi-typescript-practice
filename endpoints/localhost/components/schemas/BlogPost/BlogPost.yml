@@ -1,0 +1,15 @@
+type: object
+properties:
+  headers:
+    $ref: "./Headers.yml"
+  status:
+    type: number
+  data:
+    type: object
+    properties:
+      id:
+        type: number
+    additionalProperties: false
+additionalProperties: false
+example:
+  $ref: "./BlogPost.json"

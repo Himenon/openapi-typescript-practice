@@ -1,5 +1,5 @@
-import * as Logger from "./builder/logger";
-import * as Config from "./builder/config";
+import * as Logger from "./tools/logger";
+import * as Config from "./tools/config";
 import * as rimraf from "rimraf";
 
 const remove = (filename: string) => {

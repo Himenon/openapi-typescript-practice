@@ -1,0 +1,27 @@
+in: query
+name: filters
+style: deepObject
+explode: false
+allowReserved: true # ％表示をしない
+schema:
+  type: object
+  additionalProperties:
+    type: object
+    additionalProperties: false
+    properties:
+      gt:
+        type: string
+        description: 超える
+      gte:
+        type: string
+        description: 以上
+      lt:
+        type: string
+        description: 未満
+      lte:
+        type: string
+        description: 以下
+  example:
+    $ref: "./SearchParams.json"
+
+  

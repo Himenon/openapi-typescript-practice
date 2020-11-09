@@ -1,7 +1,7 @@
-import * as Config from "./builder/config";
-import * as logger from "./builder/logger";
-import { shell } from "./builder/shell";
-import { convertYamlToJson } from "./builder/convertOAS3yamlToJson";
+import * as Config from "./tools/config";
+import * as logger from "./tools/logger";
+import { shell } from "./tools/shell";
+import { convertYamlToJson } from "./tools/convertOAS3yamlToJson";
 import * as path from "path";
 import chokidar from "chokidar";
 

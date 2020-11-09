@@ -4,6 +4,8 @@ export const endpoints = ["localhost"];
 
 export const pkgRoot = path.resolve(__dirname, "../../");
 
+export const licenseFile = path.resolve(pkgRoot, "../../LICENSE");
+
 export const endpointsDir = path.resolve(pkgRoot, "endpoints");
 
 export const docsDir = path.resolve(pkgRoot, "docs");

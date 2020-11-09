@@ -1,147 +1,92 @@
 openapi: 3.0.1
 info:
   version: 1.0.0
-  title: Article DomainのAPI
+  title: BlogのAPIを作成
   description: Article関連のAPI週
   license:
     name: MIT
+  termsOfService: "https://swagger.io/specification/"
+  contact:
+    name: "@Himenon"
+    url: "https://github.com/Himenon"
 externalDocs:
-  url: "https://himenon.github.io/openapi-practice/article"
+  url: "https://himenon.github.io/openapi-practice"
   description: "自動生成ドキュメント"
 
 servers:
-  - url: http://localhost:4000
-    description: ローカル開発環境
-  - url: http://localhost:5000
-    description: 本番環境
+  - url: http://localhost:{port}
+    description: 開発環境
+    variables:
+      port:
+        default: "4000"
+        enum: ["4000", "5000"]
+        description: ポート番号
 
 tags:
-  - name: Article
-    description: "投稿記事の情報"
+  - name: BlogPost
+    description: "記事のAPI"
+    externalDocs:
+        url: "https://himenon.github.io/"
+  - name: LegacyPost
+    description: "古いバージョンの記事のAPI"
 
 components:
-  schemas:
-    Article:
-      $ref: "./components/schemas/Article.yml"
-    User:
-      $ref: "./components/schemas/User.yml"
-    Created:
-      $ref: "./components/schemas/success/CreatedResponse.yml"
-    Updated:
-      $ref: "./components/schemas/success/UpdatedResponse.yml"
-    Deleted:
-      $ref: "./components/schemas/success/DeletedResponse.yml"
-    FailedCreate:
-      $ref: "./components/schemas/failed/CreateResponse.yml"
-    FailedUpdate:
-      $ref: "./components/schemas/failed/UpdateResponse.yml"
-    FailedDelete:
-      $ref: "./components/schemas/failed/DeleteResponse.yml"
-  parameters:
-    UserId:
-      $ref: "./components/parameters/UserId.yml"
-    ArticleId:
-      $ref: "./components/parameters/ArticleId.yml"
+  securitySchemes:
+    SessionKey:
+      name: api_token
+      type: apiKey
+      in: cookie
 
 paths:
-  /article/:
+  /blog-post:
     post:
-      operationId: createArticle
-      description: 記事を作成する
+      servers:
+        - url: "http://localhost:9000"
+          description: ローカル開発環境向けのURL
+      operationId: createBlogPost
+      summary: ブログ記事を作成する
+      description: ログインが必要です
+      externalDocs:
+        url: https://swagger.io/specification/
       tags:
-        - Article
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Article"
+        - BlogPost
+      security:
+        - SessionKey: []
       responses:
         200:
-          description: 正常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Created"
-
-  /article/{articleId}:
-    get:
-      operationId: getArticle
-      description: 記事を取得する
-      tags:
-        - Article
-      parameters:
-        - $ref: "#/components/parameters/ArticleId"
-      responses:
-        200:
-          description: 正常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Article"
-        400:
-          description: 異常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FailedCreate"
-
-    put:
-      operationId: updateArticle
-      description: 記事を更新する
-      tags:
-        - Article
-      parameters:
-        - $ref: "#/components/parameters/ArticleId"
-      responses:
-        200:
-          description: 正常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Updated"
-        400:
-          description: 異常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FailedUpdate"
-
+          $ref: "./components/responses/SuccessCreateBlogPost.yml"
     delete:
-      operationId: deleteArticle
-      description: 記事を削除する
-      tags:
-        - Article
+      operationId: deleteBlogPost
+      summary: 記事を作成する
+      description: ログインが必要です
+      externalDocs:
+        url: https://swagger.io/specification/
+        description: ローカル開発環境
+      security:
+        - SessionKey: []
       parameters:
-        - $ref: "#/components/parameters/ArticleId"
+        - $ref: "./components/parameters/BlogId.yml"
+      tags:
+        - BlogPost
       responses:
         200:
-          description: 正常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Deleted"
-              example:
-                articleId: 100
-        400:
-          description: 異常系
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FailedDelete"
-
-  /user/{userId}:
+          $ref: "./components/responses/SuccessDeleteBlogPost.yml"
+        401:
+          $ref: "./components/responses/Unauthorized.yml"
+        404:
+          $ref: "./components/responses/NotFound.yml"
+  /search:
     get:
-      operationId: getUser
-      description: ユーザー情報を取得する
+      operationId: searchBlogPost
+      summary: ブログ記事を検索する
+      externalDocs:
+        url: https://swagger.io/specification/
       tags:
-        - User
+        - BlogPost
       parameters:
-        - $ref: "#/components/parameters/UserId"
+        - $ref: "./components/parameters/SearchParams.yml"
       responses:
         200:
-          description: "ユーザー情報を取得した"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
+          $ref: "./components/responses/SuccessSearchBlogPost.yml"
+        404:
+          $ref: "./components/responses/NotFound.yml"

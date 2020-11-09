@@ -1,8 +1,0 @@
-type: object
-description: 記事の削除に成功
-properties:
-  status:
-    type: number
-    description: StatusCode
-example:
-  status: 200

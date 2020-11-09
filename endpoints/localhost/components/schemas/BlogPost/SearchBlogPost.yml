@@ -1,0 +1,43 @@
+type: object
+additionalProperties: false
+properties:
+  headers:
+    $ref: "./Headers.yml"
+  status:
+    type: number
+  data:
+    type: object
+    additionalProperties: false
+    properties:
+      result:
+        type: array
+        items:
+          additionalProperties: false
+          type: object
+          properties:
+            id:
+              type: number
+            title:
+              type: string
+            body:
+              type: string
+            createdAt:
+              type: string
+              format: date
+            updatedAt:
+              type: string
+              format: date
+          required:
+            - id
+            - title
+            - body
+            - createdAt
+            - updatedAt
+    required:
+      - result
+required:
+  - headers
+  - status
+  - data
+example:
+  $ref: "./SearchBlogPost.json"

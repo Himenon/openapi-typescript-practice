@@ -16,6 +16,5 @@
     "rootDir": ".",
     "outDir": "dist",
     "strict": true
-  },
-  "include": ["*.ts", "*.tsx", "tools", "source", "sample"]
+  }
 }

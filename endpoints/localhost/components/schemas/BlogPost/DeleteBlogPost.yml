@@ -1,0 +1,16 @@
+type: object
+properties:
+  headers:
+    $ref: "./Headers.yml"
+  status:
+    type: number
+  data:
+    type: object
+    properties:
+      result:
+        type: string
+        enum: [ok, failed]
+    additionalProperties: false
+additionalProperties: false
+example:
+  $ref: "./DeleteBlogPost.json"

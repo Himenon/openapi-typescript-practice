@@ -1,0 +1,6 @@
+description: 正常にBlogPostが作成された
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/BlogPost/DeleteBlogPost.yml"
+

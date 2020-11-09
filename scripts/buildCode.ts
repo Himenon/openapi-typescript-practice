@@ -1,11 +1,11 @@
 import * as path from "path";
-import * as Config from "./builder/config";
-import { convertYamlToJson } from "./builder/convertOAS3yamlToJson";
-import { convertOAS3toSwagger2 } from "./builder/convertOAS3toSwagger2";
-import { generateTsCode } from "./builder/generateTsCode";
-import { clean } from "./builder/clean";
-import { shell } from "./builder/shell";
-import { copyPackageSet } from "./builder/copyPackageSet";
+import * as Config from "./tools/config";
+import { convertYamlToJson } from "./tools/convertOAS3yamlToJson";
+import { convertOAS3toSwagger2 } from "./tools/convertOAS3toSwagger2";
+import { generateTsCode } from "./tools/generateTsCode";
+import { clean } from "./tools/clean";
+import { shell } from "./tools/shell";
+import { copyPackageSet } from "./tools/copyPackageSet";
 
 export const build = async (endpoint: string): Promise<void> => {
   const params = clean(endpoint);

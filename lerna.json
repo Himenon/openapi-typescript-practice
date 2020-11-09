@@ -1,9 +1,10 @@
 {
+  "version": "0.1.0",
   "command": {
     "version": {
       "conventionalCommits": true,
       "changelogPreset": "angular-all",
-      "message": "chore(release): publish"
+      "exact": true
     }
   },
   "publish": {
@@ -11,7 +12,9 @@
     "allowBranch": "master",
     "ignoreChanges": ["CHANGELOG.md"]
   },
-  "version": "independent",
+  "stream": true,
+  "concurrency": 1,
   "npmClient": "yarn",
+  "useWorkspaces": true,
   "packages": ["."]
 }

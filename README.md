@@ -1,7 +1,6 @@
 # @himenon/openapi-typescript-practice
 
 - [ドキュメント - https://himenon.github.io/openapi-typescript-practice](https://himenon.github.io/openapi-typescript-practice)
-- [Publish 状況](https://dwango.jfrog.io/dwango/api/npm/npm/@himenon/openapi-typescript-practice)
 
 ## Development
 
@@ -12,7 +11,7 @@
 | build:docs      | ドキュメントを生成                                                               |
 | clean           | build 関連のファイル・ディレクトリを削除                                         |
 | json2schema     | json から OpenApi 3.0 の schema を吐き出す。巨大な json などに利用すると良い     |
-| mock:server     | `yarn run mock:server live2.nicovideo.jp`と実行することで API Mock Server を起動 |
+| mock:server     | `yarn run mock:server localhost`と実行することで API Mock Server を起動 |
 | publish:ghpages | docs を ghpages に publish                                                       |
 | ts              | ts-node を実行する                                                               |
 

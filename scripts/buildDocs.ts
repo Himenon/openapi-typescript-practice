@@ -1,8 +1,8 @@
-import * as Config from "./builder/config";
+import * as Config from "./tools/config";
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as logger from "./builder/logger";
-import { gitSparseClone } from "./builder/gitSparseClone";
+import * as logger from "./tools/logger";
+import { gitSparseClone } from "./tools/gitSparseClone";
 
 const main = async () => {
   const endpointsJson = fs.readdirSync(Config.endpointsOutputDir);

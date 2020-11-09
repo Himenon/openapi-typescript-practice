@@ -1,5 +1,5 @@
 in: path
-name: articleId
+name: id
 description: 記事のID
 required: true
 schema:

@@ -19,6 +19,7 @@ export const gitSparseClone = async ({
   const cwd = outputLocalDir;
   await shell(`git clone --filter=blob:none --no-checkout ${url} .`, cwd);
   await shell(`git sparse-checkout set ${repoDir}`, cwd);
+  await shell(`git config pull.ff only`, cwd);
   // await shell(`git config core.sparseCheckout true`, cwd);
   await shell(`git pull origin master`);
 };
