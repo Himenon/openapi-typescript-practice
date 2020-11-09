@@ -2,19 +2,20 @@
 /// <reference path="{{&.}}" />
 {{/imports}}
 
-import * as request from "superagent";
-import { SuperAgentStatic, SuperAgentRequest, Response } from "superagent";
+import * as superagent from "superagent";
+
+export { superagent };
 
 export type RequestHeaders = {
     [header: string]: string;
 }
 export type RequestHeadersHandler = (headers: RequestHeaders) => RequestHeaders;
 
-export type ConfigureAgentHandler = (agent: SuperAgentStatic) => SuperAgentStatic;
+export type ConfigureAgentHandler = (agent: superagent.SuperAgentStatic) => superagent.SuperAgentStatic;
 
-export type ConfigureRequestHandler = (agent: SuperAgentRequest) => SuperAgentRequest;
+export type ConfigureRequestHandler = (agent: superagent.SuperAgentRequest) => superagent.SuperAgentRequest;
 
-export type CallbackHandler = (err: any, res?: request.Response) => void;
+export type CallbackHandler = (err: any, res?: superagent.Response) => void;
 
 {{#definitions}}
 export type {{&name}} = {{#tsType}}{{> type}}{{/tsType}};
@@ -23,7 +24,7 @@ export type {{&name}} = {{#tsType}}{{> type}}{{/tsType}};
 
 export type Logger = { log: (line: string) => any };
 
-export interface ResponseWithBody<S extends number, T> extends Response {
+export interface ResponseWithBody<S extends number, T> extends superagent.Response {
     status: S;
     body: T;
 }
@@ -84,8 +85,8 @@ export class {{&className}} {
         }
 
         const agent = this.configureAgentHandler
-            ? this.configureAgentHandler(request.default)
-            : request.default;
+            ? this.configureAgentHandler(superagent.default)
+            : superagent.default;
 
         let req = agent(method, url);
         if (this.configureRequestHandler) {
