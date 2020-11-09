@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  version: 1.0.0
-  title: BlogのAPIを作成
+  version: "{{ pkg.version }}"
+  title: OpenAPI 3.0の練習
   description: Article関連のAPI週
   license:
     name: MIT
@@ -26,7 +26,7 @@ tags:
   - name: BlogPost
     description: "記事のAPI"
     externalDocs:
-        url: "https://himenon.github.io/"
+      url: "https://himenon.github.io/"
   - name: LegacyPost
     description: "古いバージョンの記事のAPI"
 

@@ -2,19 +2,14 @@ import * as Config from "./tools/config";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as logger from "./tools/logger";
-import { gitSparseClone } from "./tools/gitSparseClone";
+import cpy from "cpy";
 
 const main = async () => {
   const endpointsJson = fs.readdirSync(Config.endpointsOutputDir);
-  if (!fs.existsSync(Config.tmpSwaggerUiDir)) {
-    await gitSparseClone({
-      url: "https://github.com/swagger-api/swagger-ui.git",
-      outputLocalDir: Config.tmpSwaggerUiDir,
-      repoDir: "dist",
-    });
-  }
+  await cpy([path.join(__dirname, "templates/swagger-ui/*")], Config.docsDir, {
+    ignore: ["index.html.tmpl"],
+  });
   const suggestions = endpointsJson.map((endpoint) => `endpoints/${endpoint}`);
-  fs.copySync(path.join(Config.tmpSwaggerUiDir, "dist"), Config.docsDir);
   const indexHtml = fs.readFileSync(
     path.join(__dirname, "./templates/swagger-ui/index.html.tmpl"),
     { encoding: "utf-8" }

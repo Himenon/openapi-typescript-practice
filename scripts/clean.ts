@@ -11,7 +11,6 @@ const main = () => {
   remove(Config.distDir);
   remove(Config.docsDir);
   remove(Config.libDir);
-  remove(Config.tmpSwaggerUiDir);
   remove(Config.sourceDir);
   console.log("clean up!");
 };

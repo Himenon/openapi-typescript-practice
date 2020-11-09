@@ -1,6 +1,5 @@
 {
   "*.{js,jsx,json,yml,yaml,html,md}": ["prettier --write"],
   "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-  "*.{css,scss}": ["stylelint --fix"],
   "package.json": ["sort-package-json"]
 }

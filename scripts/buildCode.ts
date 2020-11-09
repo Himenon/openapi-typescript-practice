@@ -2,6 +2,7 @@ import * as path from "path";
 import * as Config from "./tools/config";
 import { convertYamlToJson } from "./tools/convertOAS3yamlToJson";
 import { convertOAS3toSwagger2 } from "./tools/convertOAS3toSwagger2";
+import { updateVersion } from "./tools/updateVersion";
 import { generateTsCode } from "./tools/generateTsCode";
 import { clean } from "./tools/clean";
 import { shell } from "./tools/shell";
@@ -14,6 +15,7 @@ export const build = async (endpoint: string): Promise<void> => {
     filename: endpointFile,
     output: params.endpointJsonFile,
   });
+  updateVersion(params.endpointJsonFile);
   const swagger = await convertOAS3toSwagger2(params.endpointJsonFile);
   await generateTsCode(params.tsFile, JSON.parse(swagger));
 
