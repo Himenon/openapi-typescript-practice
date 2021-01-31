@@ -1,8 +1,6 @@
 import * as path from "path";
 import * as Config from "./tools/config";
 import { convertYamlToJson } from "./tools/convertOAS3yamlToJson";
-import { convertOAS3toSwagger2 } from "./tools/convertOAS3toSwagger2";
-import { updateVersion } from "./tools/updateVersion";
 import { generateTsCode } from "./tools/generateTsCode";
 import { clean } from "./tools/clean";
 import { shell } from "./tools/shell";
@@ -10,14 +8,12 @@ import { copyPackageSet } from "./tools/copyPackageSet";
 
 export const build = async (endpoint: string): Promise<void> => {
   const params = clean(endpoint);
-  const endpointFile = path.join(Config.endpointsDir, endpoint, "index.yml");
+  const entryPoint = path.join(Config.endpointsDir, endpoint, "index.yml");
   await convertYamlToJson({
-    filename: endpointFile,
+    filename: entryPoint,
     output: params.endpointJsonFile,
   });
-  updateVersion(params.endpointJsonFile);
-  const swagger = await convertOAS3toSwagger2(params.endpointJsonFile);
-  await generateTsCode(params.tsFile, JSON.parse(swagger));
+  generateTsCode(entryPoint, params.tsFile);
 
   await shell(`eslint --fix ${params.tsFile}`);
 };

@@ -10,3 +10,4 @@ source/
 *.zip
 swagger-editor/
 .tmp*
+.DS_Store

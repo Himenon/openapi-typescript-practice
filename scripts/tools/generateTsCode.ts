@@ -1,31 +1,20 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as logger from "./logger";
-import { CodeGen } from "swagger-typescript-codegen";
+import { generateTypeScriptCode } from "@himenon/openapi-typescript-code-generator";
 
-const readTemplate = (filename: string): string => {
-  return fs.readFileSync(path.join(__dirname, filename), { encoding: "utf-8" });
-};
-
-export const generateTsCode = async (
-  filename: string,
-  swagger: any
-): Promise<void> => {
-  const tsSourceCode = CodeGen.getTypescriptCode({
-    className: "Client",
-    swagger,
-    template: {
-      class: readTemplate("../templates/codegen/class.mustache"),
-      method: readTemplate("../templates/codegen/method.mustache"),
-      type: readTemplate("../templates/codegen/type.mustache"),
-    },
-    // imports: ["../../typings/tsd.d.ts"],
+export const generateTsCode = (
+  entryPoint: string,
+  outputFileName: string
+): void => {
+  const tsSourceCode = generateTypeScriptCode({
+    entryPoint,
   });
 
-  fs.mkdirSync(path.dirname(filename), { recursive: true });
-  fs.writeFileSync(filename, tsSourceCode, {
+  fs.mkdirSync(path.dirname(outputFileName), { recursive: true });
+  fs.writeFileSync(outputFileName, tsSourceCode, {
     encoding: "utf-8",
   });
 
-  logger.log(`create ${filename}`);
+  logger.log(`create ${outputFileName}`);
 };
